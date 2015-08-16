@@ -72,7 +72,18 @@ describe "Authentication" do
 	      	let(:user) { FactoryGirl.create(:user) }
 
 
+	      	describe "in the Microposts controller" do
 
+		        describe "submitting to the create action" do
+		          before { post microposts_path }
+		          specify { expect(response).to redirect_to(signin_path) }
+		        end
+
+		        describe "submitting to the destroy action" do
+		          before { delete micropost_path(FactoryGirl.create(:micropost)) }
+		          specify { expect(response).to redirect_to(signin_path) }
+		        end
+      		end #in the Microposts controller
 
 			describe "when attempting to visit a protected page" do
 		        before do
